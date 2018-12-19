@@ -9,9 +9,23 @@ ddb = boto3.resource('dynamodb')
 response_table = ddb.Table(responses)
 
 def lambda_handler(event, context):
+
+    keywords = ['watch','eat','weather']
+
     
     query = event['query']
+
     terms = query.split(' ')
-    keywords = ['watch','eat','weather']
+
+    for word in terms:
+        if word in keywords:
+            
+
+
+    
+    
+
+
+
 
     

@@ -1,11 +1,13 @@
-var query = new String();
+// Get search query
 $( document ).ready(function() {
-		$( "#submit" ).click((e) => {
-			query = $( "#search" ).val();
+		$('#submit').click((e) => {
+			query = $('#search').val();
 			console.log(query);
+			// Make sure they ask something
 			if (query.length == 0) {
 				javascript:alert('Ask me a darn question!');
 			} else {
+				// Setup lambda call
 				var params = {
 					FunctionName: 'getQuip',
 					InvocationType: 'RequestResponse',
@@ -18,35 +20,46 @@ $( document ).ready(function() {
 		})
 	});
 
-    $( "#search" ).keypress((e) => {
+	// Include enters for clicks
+    $('#search').keypress((e) => {
     if ( e.which == 13 ) {
-        $( "#submit" ).click();
+        $('#submit').click();
     	}	
 	});
 
-function doModal(heading, formContent) {
+// Create modal for response display 
+function doModal(content) {
     html =  '<div id="dynamicModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="confirm-modal" aria-hidden="true">';
-    html += '<div class="modal-dialog">';
+    html += '<div class="modal-dialog modal-dialog-centered">';
     html += '<div class="modal-content">';
     html += '<div class="modal-header">';
-    html += '<a class="close" data-dismiss="modal">X</a>';
-    html += '<h4>'+heading+'</h4>'
-    html += '</div>';
-    html += '<div class="modal-body">';
-    html += formContent;
-    html += '</div>';
+    //html += '<a class="close ml-0" data-dismiss="modal">x</a>';
+    html += '<h4 class=" mt-0 m-auto">Uncle Paul says...</h4>'
+    html += '</div>'; // header
+    html += '<div class="modal-body mr-1">';
+    html += '<div class="row">';
+    html += '<div class="col-md-6 m-auto" >';
+    html += content;
+    html += '</div>'; //content
+    html += '<div class="col-md-6">';
+    html += '<img src="http://unclepaulknowsall.com/css/images/crossed_arms.jpg" class="img-thumbnail rounded float-right" alt="ResponsiveImage">';
+    html += '</div>'; // image
+    html += '</div>'; // row
+    html += '</div>'; // modal
     html += '<div class="modal-footer">';
-    html += '<span class="btn btn-primary" data-dismiss="modal">Close</span>';
+    html += '<span class="btn btn-primary m-auto" data-dismiss="modal">Close</span>';
     html += '</div>';  // content
     html += '</div>';  // dialog
     html += '</div>';  // footer
     html += '</div>';  // modalWindow
     $('body').append(html);
-    $("#dynamicModal").modal();
-    $("#dynamicModal").modal('show');
+    $('#dynamicModal').modal();
+    $('#dynamicModal').modal('show');
 
+    // exit modal and clear search
     $('#dynamicModal').on('hidden.bs.modal', function (e) {
-        $(this).remove();
+        $(this).remove()
+        $('#search').val('');
     });
 
 }
@@ -70,7 +83,7 @@ function triggerLambda(params) {
 			if (message != null) {
 				var response = message['body'];
 				console.log(response);
-				doModal("Uncle Paul says...",response);
+				doModal(response);
 
 			}
 
