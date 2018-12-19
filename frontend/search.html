@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Uncle Paul Knows All</title>
+	<link rel="stylesheet" href="css/search-page.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+
+	<!-- Search form and button -->
+	<div class="input-group w-75 mx-auto mt-lg-5 shadow-sm">
+		<input id="search" type="text" class="form-control" placeholder="Ask Uncle Paul a question..." aria-label="Search" aria-describedby="basic-addon2">
+		<div class="input-group-append">
+			<button id="submit" class="btn btn-outline-secondary" type="button" onclick="javascript:alert('Uncle Paul is tired right now...')">Submit</button>
+	  </div>
+	</div>
+
+	<!--- Modal response --->
+	<div id="response-modal"></div>
+
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+	<!-- AWS JS SDK -->
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.348.0.min.js"></script>
+
+	<!-- Custom query scripts -->
+	<script src = js/search.js></script>
+
+</body>
+</html>

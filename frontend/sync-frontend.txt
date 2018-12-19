@@ -1,0 +1,1 @@
+aws s3 sync c:/users/jskrable/aws/s3/unclepaul/ s3://unclepaulknowsall.com/ --profile personal
