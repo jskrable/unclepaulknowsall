@@ -12,7 +12,7 @@ $( document ).ready(function() {
 					FunctionName: 'getQuip',
 					InvocationType: 'RequestResponse',
 					LogType: 'Tail',
-					Payload: '{"query": ' + JSON.stringify(query) + '}' // search terms
+					Payload: '{"query": ' + JSON.stringify(query.toLowerCase()) + '}' // search terms
 				};
 				console.log(params);
 				triggerLambda(params);
@@ -38,7 +38,7 @@ function doModal(content) {
     html += '</div>'; // header
     html += '<div class="modal-body mr-1">';
     html += '<div class="row">';
-    html += '<div class="col-md-6 m-auto" >';
+    html += '<div class="col-md-6 text-center m-auto" >';
     html += content;
     html += '</div>'; //content
     html += '<div class="col-md-6">';
@@ -65,13 +65,18 @@ function doModal(content) {
 }
 
 function triggerLambda(params) {
+
+	// Cognito pool credentials
 	AWS.config.update({region: 'us-east-2'});
 	AWS.config.credentials = new AWS.CognitoIdentityCredentials({
 		IdentityPoolId: 'us-east-2:c50cc00d-7943-4e8b-b141-518f4a48ff8a',
 	});
 
+	// Config lambda
 	var lambda = new AWS.Lambda({region: 'us-east-2', apiVersion: '2015-03-31'});
+	// Initialize results
 	var results;
+	// Call lambda
 	lambda.invoke(params, function(error, data) {
 		if (error) {
             prompt(error);
@@ -83,6 +88,7 @@ function triggerLambda(params) {
 			if (message != null) {
 				var response = message['body'];
 				console.log(response);
+				// Display results 
 				doModal(response);
 
 			}
