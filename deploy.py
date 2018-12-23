@@ -4,7 +4,8 @@ import subprocess
 def deploy():
 
     # Set local env variables
-    path = 'c:/users/jskrable/code/unclepaulknowsall/'
+    #path = 'c:/users/jskrable/code/unclepaulknowsall/'
+    path = 'c:/users/jskra/code/unclepaulknowsall/'
     front = path + 'frontend/'
     mid = path + 'middleware/'
     package = mid + 'package/function.zip'
@@ -13,7 +14,8 @@ def deploy():
     # Set AWS env variables
     s3 = 's3://unclepaulknowsall.com'
     lambdaFunction = 'getQuip'
-    profile = 'personal'
+    #profile = 'personal'
+    profile = 'DEFAULT'
     region = 'us-east-2'
     
     print('Deploying site code to S3 Bucket ' + s3 + '...') 

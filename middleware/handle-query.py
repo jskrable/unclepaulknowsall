@@ -1,8 +1,8 @@
 import json
 import boto3
-from boto3.dynamodb.conditions import Key
 import random
 import os
+import datetime
 
 
 def lambda_handler(event, context):
@@ -22,7 +22,8 @@ def lambda_handler(event, context):
     score = []
     [score.append(x) for x in interrogatives if x in query]
     [score.append(x) for x in keywords if x in query]
-    print(score)
+
+    update_table(query)
 
     if 'what' and 'name' in score:
         response = "I'm Uncle Paul. It says my name all over the screen."
@@ -35,6 +36,18 @@ def lambda_handler(event, context):
     return {
         'statusCode': 200,
         'body': json.dumps(response)} 
-    
 
-    
+
+def update_table(submission):
+
+    dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+    history = dynamodb.Table('question-history')
+
+    item = {
+        'question': submission,
+        'timestamp': str(datetime.datetime.now())
+    }
+
+    history.put_item(
+        Item = item
+    )
